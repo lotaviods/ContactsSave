@@ -1,6 +1,5 @@
 <?php
 namespace Lotaviods\bank;
-
 use Lotaviods\bank\IConnectionRepository;
 use PDO;
 
@@ -20,7 +19,7 @@ class BankConf implements IConnectionRepository
         if (empty($result->fetchAll()) != true) {
             $result->execute();
             foreach ($result->fetchAll() as $contatos) {
-                echo "Contato {$contatos['id']} : Nome : {$alunos['nome']} Email: {$alunos['email']} \n";
+                echo "Contato {$contatos['id']} : Nome : {$contatos['nome']} Email: {$contatos['email']} \n";
 
             }
         } else {

@@ -4,8 +4,8 @@ function delelar() {
             url: "./Del.php",
         })
         alert('Confirmado');
-        window.location = "./Index.php";
+        window.location = "/../Index.php";
     } else {
-        window.location = "./Index.php";
+        window.location = "/../Index.php";
     }
 }
