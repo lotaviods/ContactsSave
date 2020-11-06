@@ -13,14 +13,14 @@ class BankConf implements IConnectionRepository
         $this->connect = $connect;
     }
     function list() {
-        $all = "SELECT * FROM alunos";
+        $all = "SELECT * FROM contatos";
         $result = $this->connect->prepare($all);
         $result->execute();
 
         if (empty($result->fetchAll()) != true) {
             $result->execute();
-            foreach ($result->fetchAll() as $alunos) {
-                echo "Contato {$alunos['id']} : Nome : {$alunos['nome']} Email: {$alunos['email']} \n";
+            foreach ($result->fetchAll() as $contatos) {
+                echo "Contato {$contatos['id']} : Nome : {$alunos['nome']} Email: {$alunos['email']} \n";
 
             }
         } else {
@@ -29,7 +29,7 @@ class BankConf implements IConnectionRepository
     }
     public function Add($nome, $email)
     {
-        $value = "INSERT INTO alunos (nome, email) VALUES (?, ?);"; // Variavel a ser preparada.
+        $value = "INSERT INTO contatos (nome, email) VALUES (?, ?);"; // Variavel a ser preparada.
         $statement = $this->connect->prepare($value); // paga o valor da variavel value e passa para o statement.
         $statement->bindValue(1, "$nome"); //substitui o valor do primeiro ?
         $statement->bindValue(2, "$email");
@@ -38,7 +38,7 @@ class BankConf implements IConnectionRepository
     }
     public function DelAll()
     {
-        $sql = "TRUNCATE TABLE alunos";
+        $sql = "TRUNCATE TABLE contatos";
         $stmt = $this->connect->prepare($sql);
         $stmt->execute();
     }
