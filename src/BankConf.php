@@ -1,30 +1,45 @@
 <?php
+namespace Lotaviods\bank;
+
+use Lotaviods\bank\IConnectionRepository;
+use PDO;
+
 class BankConf implements IConnectionRepository
 {
     public $nome;
-    public function CreateTable(string $nome)
+    public $connect;
+    public function __construct(PDO $connect)
     {
-        $connect = ConnectBank::CreateConnection();
-        $this->nome = $nome;
-        $connect->exec('CREATE TABLE ' . "$nome" . ' (id AUTO_INCREMENT);');
+        $this->connect = $connect;
     }
-    public function AddColum($table, $Add)
-    {
-        $connect = ConnectBank::CreateConnection();
-        $connect->exec('ALTER TABLE ' . "$table " . 'ADD ' . "$Add");
+    function list() {
+        $all = "SELECT * FROM alunos";
+        $result = $this->connect->prepare($all);
+        $result->execute();
+
+        if (empty($result->fetchAll()) != true) {
+            $result->execute();
+            foreach ($result->fetchAll() as $alunos) {
+                echo "Contato {$alunos['id']} : Nome : {$alunos['nome']} Email: {$alunos['email']} \n";
+
+            }
+        } else {
+            echo "Não existe nenhum contato";
+        }
     }
-    public function fetchAll($table)
+    public function Add($nome, $email)
     {
-        $connect = ConnectBank::CreateConnection();
-        $all = $connect->query('SELECT * FROM ' . "$table ;")->fetchAll(PDO::FETCH_ASSOC);
-        var_dump($all);
+        $value = "INSERT INTO alunos (nome, email) VALUES (?, ?);"; // Variavel a ser preparada.
+        $statement = $this->connect->prepare($value); // paga o valor da variavel value e passa para o statement.
+        $statement->bindValue(1, "$nome"); //substitui o valor do primeiro ?
+        $statement->bindValue(2, "$email");
+        var_dump($statement->execute());
+        //var_dump($statement->execute());
     }
-    public function Add($table, $colum, $val)
+    public function DelAll()
     {
-        $connect = ConnectBank::CreateConnection();
-        $value = "INSERT INTO $table ($colum) VALUES (?);"; // Variavel a ser preparada.
-        $statement = $connect->prepare($value); // paga o valor da variavel value e passa para o statement.
-        $statement->bindValue(1, "$val"); //substitui o valor do primeiro ? 
-        $statement->execute();
+        $sql = "TRUNCATE TABLE alunos";
+        $stmt = $this->connect->prepare($sql);
+        $stmt->execute();
     }
 }
