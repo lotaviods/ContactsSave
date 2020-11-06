@@ -1,12 +1,9 @@
 {
-    "name": "lotaviods/php",
-    "license": "Apache2.0",
-    "authors": [
-        {
-            "name": "lotaviods",
-            "email": "l.otavio9099@gmail.com"
-        }
-    ],
+    "name": "lotaviods/bank",
+    "authors": [{
+        "name": "lotaviods",
+        "email": "l.otavio9099@gmail.com"
+    }],
     "require": {},
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.5"

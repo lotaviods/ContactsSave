@@ -1,7 +1,7 @@
 <?php
-
 namespace Lotaviods\bank;
 use PDO;
+
 class ConnectBank
 {
     public static function CreateConnection(): PDO

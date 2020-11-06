@@ -2,7 +2,7 @@
 use Lotaviods\bank\BankConf;
 use Lotaviods\bank\ConnectBank;
 
-require_once '../vendor/autoload.php';
+require_once './vendor/autoload.php';
 if ($_POST['nome'] == '' or $_POST['email'] == '') {
     ?>
     <script>
