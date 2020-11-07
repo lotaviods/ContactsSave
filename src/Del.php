@@ -1,6 +1,6 @@
 <?php
-use Lotaviods\bank\BankConf;
-use Lotaviods\bank\ConnectBank;
+use Lotaviods\Contacts\BankConf;
+use Lotaviods\Contacts\ConnectBank;
 require_once "./vendor/autoload.php";
     $connect = ConnectBank::CreateConnection();
     $bank = new BankConf($connect);
