@@ -1,6 +1,6 @@
 <?php
-namespace Lotaviods\bank;
-use Lotaviods\bank\IConnectionRepository;
+namespace Lotaviods\Contacts;
+use Lotaviods\Contacts\IConnectionRepository;
 use PDO;
 
 class BankConf implements IConnectionRepository
