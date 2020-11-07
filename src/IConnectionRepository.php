@@ -1,5 +1,5 @@
 <?php
-namespace Lotaviods\bank;
+namespace Lotaviods\Contacts;
 interface IConnectionRepository
 {
     public function Add($nome, $email);
