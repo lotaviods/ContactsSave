@@ -1,5 +1,5 @@
 <?php
-namespace Lotaviods\bank;
+namespace Lotaviods\Contacts;
 use PDO;
 class ConnectBank
 {
