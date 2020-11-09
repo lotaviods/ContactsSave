@@ -6,7 +6,7 @@ require_once './vendor/autoload.php';
 if ($_POST['nome'] == '' or $_POST['email'] == '') {
     ?>
     <script>
-    window.location = "../Index.php";
+    window.location = "Index.php";
     alert("Nome ou Email não pode estar vazio");
     </script>
     <?php

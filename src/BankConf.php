@@ -8,11 +8,12 @@ class BankConf implements IConnectionRepository
     public $nome;
     public $connect;
     public function __construct(PDO $connect)
+
     {
         $this->connect = $connect;
     }
     function list() {
-        $all = "SELECT * FROM contatos";
+        $all = "SELECT * FROM contacts";
         $result = $this->connect->prepare($all);
         $result->execute();
 
@@ -28,7 +29,7 @@ class BankConf implements IConnectionRepository
     }
     public function Add($nome, $email)
     {
-        $value = "INSERT INTO contatos (nome, email) VALUES (?, ?);"; // Variavel a ser preparada.
+        $value = "INSERT INTO contacts (nome, email) VALUES (?, ?);"; // Variavel a ser preparada.
         $statement = $this->connect->prepare($value); // paga o valor da variavel value e passa para o statement.
         $statement->bindValue(1, "$nome"); //substitui o valor do primeiro ?
         $statement->bindValue(2, "$email");
@@ -37,7 +38,7 @@ class BankConf implements IConnectionRepository
     }
     public function DelAll()
     {
-        $sql = "TRUNCATE TABLE contatos";
+        $sql = "TRUNCATE TABLE contacts";
         $stmt = $this->connect->prepare($sql);
         $stmt->execute();
     }
