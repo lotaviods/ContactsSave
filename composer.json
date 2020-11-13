@@ -4,9 +4,11 @@
         "name": "lotaviods",
         "email": "l.otavio9099@gmail.com"
     }],
-    "require": {},
-    "require-dev": {
+    "require": {
+        "doctrine/orm": "^2.6.2",
+        "symfony/yaml": "2.*"
     },
+    "require-dev": {},
     "autoload": {
         "psr-4": {
             "Lotaviods\\Contacts\\": "src"

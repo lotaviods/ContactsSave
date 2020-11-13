@@ -1,19 +1,24 @@
 <?php
-namespace Lotaviods\Contacts;
-use Lotaviods\Contacts\IConnectionRepository;
-use PDO;
+namespace Lotaviods\Contacts\Config;
 
-class BankConf implements IConnectionRepository
+use Lotaviods\Contacts\Config\Connection\ConnectBank;
+use Lotaviods\Contacts\Contato;
+
+class BankFunctions
 {
     public $nome;
     public $connect;
-    public function __construct(PDO $connect)
 
-    {
-        $this->connect = $connect;
-    }
     function list() {
-        $all = "SELECT * FROM contacts";
+
+        $getManager = new ConnectBank();
+        $manager= $getManager->EntityManager();
+
+        
+
+
+
+        /*$all = "SELECT * FROM contacts";
         $result = $this->connect->prepare($all);
         $result->execute();
 
@@ -27,14 +32,20 @@ class BankConf implements IConnectionRepository
             echo "Não existe nenhum contato";
         }
     }
+    */
+}
     public function Add($nome, $email)
-    {
-        $value = "INSERT INTO contacts (nome, email) VALUES (?, ?);"; // Variavel a ser preparada.
-        $statement = $this->connect->prepare($value); // paga o valor da variavel value e passa para o statement.
-        $statement->bindValue(1, "$nome"); //substitui o valor do primeiro ?
-        $statement->bindValue(2, "$email");
-        var_dump($statement->execute());
-        //var_dump($statement->execute());
+    {   
+        $Contato = new Contato;
+        $Contato->setNome($nome);
+        $Contato->setEmail($email);
+
+        $getManager = new ConnectBank();
+        $manager= $getManager->EntityManager();
+
+        $manager->persist($Contato);
+        $manager->flush();
+
     }
     public function DelAll()
     {
