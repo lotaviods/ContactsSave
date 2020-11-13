@@ -1,13 +1,25 @@
 <?php
 namespace Lotaviods\Contacts\Entity;
-
-
-
+/** 
+ * @Entity
+ * @Table(name="contacts")
+ */
 class Contato {
+    /** 
+     * @Id
+     * @GeneratedValue
+     * @Column(type="integer")
+     */
     private $id;
+    /** 
+     * @Column(type="string")
+     */ 
     private $nome;
+    /** 
+     * @Column(type="string")
+     */
     private $email;
-    
+
     public function getNome()
     {
         return $this->nome;

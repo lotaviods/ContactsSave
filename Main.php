@@ -1,6 +1,7 @@
 <?php
-use Lotaviods\Contacts\Config\BankConfig as Bank;
+
 use Lotaviods\Contacts\ConnectBank;
+use Lotaviods\Contacts\Config\BankFunctions;
 
 require_once './vendor/autoload.php';
 if ($_POST['nome'] == '' or $_POST['email'] == '') {
@@ -18,7 +19,7 @@ if ($_POST['nome'] == '' or $_POST['email'] == '') {
     if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         // Validação do email e inserção dos dados
  
-        $bank = new Bank();
+        $bank = new BankFunctions();
         $bank->Add($_POST['nome'], $_POST['email']);
 
         ?>

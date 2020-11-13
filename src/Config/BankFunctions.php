@@ -1,38 +1,29 @@
 <?php
 namespace Lotaviods\Contacts\Config;
 
+use Lotaviods\Contacts\Entity\Contato;
 use Lotaviods\Contacts\Config\Connection\ConnectBank;
-use Lotaviods\Contacts\Contato;
+
 
 class BankFunctions
 {
-    public $nome;
-    public $connect;
-
     function list() {
 
         $getManager = new ConnectBank();
         $manager= $getManager->EntityManager();
+        $query = $manager->createQuery('SELECT contatos FROM Lotaviods\\Contacts\\Entity\\Contato contatos');
+        $list = $query->getResult();
 
-        
-
-
-
-        /*$all = "SELECT * FROM contacts";
-        $result = $this->connect->prepare($all);
-        $result->execute();
-
-        if (empty($result->fetchAll()) != true) {
-            $result->execute();
-            foreach ($result->fetchAll() as $contatos) {
-                echo "Contato {$contatos['id']} : Nome : {$contatos['nome']} Email: {$contatos['email']} \n";
-
-            }
-        } else {
-            echo "Não existe nenhum contato";
+        $cont = 0;
+        if (empty($list)){
+            echo "Não existe nenhum contato ainda";
+        }else{
+        foreach ($list as $contatos) {
+            $cont = $cont+1;
+            echo "\nContato: {$cont} \n\tID : {$contatos->getId()}\n  \tNome: {$contatos->getNome()}\n\tEmail: {$contatos->getEmail()}\n";
         }
+
     }
-    */
 }
     public function Add($nome, $email)
     {   
@@ -49,8 +40,11 @@ class BankFunctions
     }
     public function DelAll()
     {
-        $sql = "TRUNCATE TABLE contacts";
-        $stmt = $this->connect->prepare($sql);
-        $stmt->execute();
+        $getManager = new ConnectBank();
+        $manager= $getManager->EntityManager();
+        $connection = $manager->getConnection();
+        $platform   = $connection->getDatabasePlatform();
+        
+        $connection->executeUpdate($platform->getTruncateTableSQL('contacts', true /* whether to cascade */));
     }
 }

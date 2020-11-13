@@ -16,11 +16,7 @@ class ConnectBank
     }
     public static function EntityManager(){
         $isDevMode = true;
-        $proxyDir = null;
-        $cache = null;
-
-        $config = Setup::createXMLMetadataConfiguration(array(__DIR__."\..\xml"), $isDevMode);
-
+        $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/../../../src"), $isDevMode);
         $conn = array(
             'driver' => 'pdo_sqlite',
             'path' => __DIR__ . '/var/data/bank.sqlite',
